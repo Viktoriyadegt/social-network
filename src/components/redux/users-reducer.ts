@@ -3,14 +3,18 @@ type ActionsTypes =
     | ReturnType<typeof unFollowAC>
     | ReturnType<typeof setUsersAC>
 
+type PhotosType = {
+    small: string
+    large:string
+}
 
-export type usersPropsType = {
+export type UsersPropsType = {
     id: number
-    follow: boolean
-    fullName: string
-    photo: string
+    name: string
+    photos: PhotosType
+    followed:boolean
     status: string
-    location: LocationPropsType
+    //location: LocationPropsType
 }
 
 export type LocationPropsType = {
@@ -21,7 +25,7 @@ export type LocationPropsType = {
 
 
 export type InitialStateType = {
-    users: Array<usersPropsType>
+    users: Array<UsersPropsType>
 }
 const initialState:InitialStateType = {
     users: []
@@ -31,13 +35,13 @@ const UsersReducer = (state: InitialStateType = initialState, action: ActionsTyp
         case "FOLLOW": {
             return {
                 ...state,
-                users: state.users.map(m => m.id === action.payload.userId ? {...m, follow: true} : m)
+                users: state.users.map(m => m.id === action.payload.userId ? {...m, followed: true} : m)
             }
         }
         case "UNFOLLOW": {
             return {
                 ...state,
-                users: state.users.map(m => m.id === action.payload.userId ? {...m, follow: false} : m)
+                users: state.users.map(m => m.id === action.payload.userId ? {...m, followed: false} : m)
             }
         }
         case "SET_USERS":{
@@ -66,7 +70,7 @@ export const unFollowAC = (userId: number) => ({
     payload: {userId}
 } as const)
 
-export const setUsersAC = (users: Array<usersPropsType>) => ({
+export const setUsersAC = (users: Array<UsersPropsType>) => ({
     type: 'SET_USERS',
     payload:{users}
 }as const)
