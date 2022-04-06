@@ -10,6 +10,7 @@ export const Navbar :React.FC<NavbarPropsType> = () => {
         <nav className={s.nav}>
                 <NavLinkItem title="Profile" link={'profile'}/>
                 <NavLinkItem title="Messages" link={'dialogs'}/>
+                <NavLinkItem title="Users" link={'users'}/>
                 <NavLinkItem title="News" link={'news'}/>
                 <NavLinkItem title="Music" link={'music'}/>
                 <NavLinkItem title="Settings" link={'settings'}/>

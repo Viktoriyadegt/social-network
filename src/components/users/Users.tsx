@@ -3,42 +3,44 @@ import styles from "./Users.module.css";
 import axios from 'axios'
 import {UsersPropsType} from "../redux/users-reducer";
 import userPhoto from '../../images/images.png'
+import React from "react";
 
 type PropsType = {
     users: Array<UsersType>
-    follow: (userId:number)=>void
-    unfollow: (userId:number)=>void
-    setUsers:(users:Array<UsersType>)=>void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+    setUsers: (users: Array<UsersType>) => void
 }
 type ResponseType = {
     items: Array<UsersPropsType>
     totalCount: number
-    error:string
+    error: string
 }
 
-const Users = (props: UsersType) => {
-    const getUsers =() =>{
-        if (props.usersPage.users.length === 0) {
-            axios.get<ResponseType>("https://social-network.samuraijs.com/api/1.0/users")
-                .then(response => {
-                    return props.setUsersAC(response.data.items);
-                })
-        }
+class Users extends React.Component<UsersType> {
+    componentDidMount() {
+        axios.get<ResponseType>("https://social-network.samuraijs.com/api/1.0/users")
+            .then(response => {
+                return this.props.setUsersAC(response.data.items);
+            })
     }
 
+    render() {
+        return <div>
 
-    return (
-        <div>
-            <button onClick={getUsers}>Get Users</button>
-            {props.usersPage.users.map(m => <div key={m.id}>
+            {this.props.usersPage.users.map(m => <div key={m.id}>
                 <span>
-                    <div >
+                    <div>
                         <img src={m.photos.small !== null ? m.photos.small : userPhoto} className={styles.photo}/>
                     </div>
                     <div>{
                         m.followed
-                            ? <button onClick={() => {props.unFollowAC(m.id)}}>Unfollow</button>
-                            : <button onClick={() => {props.followAC(m.id)}}>Follow</button>
+                            ? <button onClick={() => {
+                                this.props.unFollowAC(m.id)
+                            }}>Unfollow</button>
+                            : <button onClick={() => {
+                                this.props.followAC(m.id)
+                            }}>Follow</button>
                     }</div>
                 </span>
                 <span>
@@ -53,7 +55,7 @@ const Users = (props: UsersType) => {
                 </span>
             </div>)}
         </div>
-    )
+    }
 
 
 };
