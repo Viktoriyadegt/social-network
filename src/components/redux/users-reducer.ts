@@ -10,7 +10,7 @@ type PhotosType = {
     large: string
 }
 
-export type UsersPropsType = {
+ export type UsersPropsType = {
     id: number
     name: string
     photos: PhotosType
@@ -19,22 +19,25 @@ export type UsersPropsType = {
     //location: LocationPropsType
 }
 
+/*
 export type LocationPropsType = {
     city: string
     country: string
 }
+*/
 
-
-export type InitialStateType = {
-    users: Array<UsersPropsType>
-    totalUsersCount: number
-    pageSize: number
-    currentPage: number
-}
-const initialState: InitialStateType = {
-    users: [],
-    totalUsersCount: 15,
-    pageSize: 10,
+//
+// export type InitialStateType = {
+//     users: Array<UsersPropsType>
+//     totalUsersCount: number
+//     pageSize: number
+//     currentPage: number
+// }
+export type InitialStateType = typeof initialState
+const initialState = {
+    users: [] as Array<UsersPropsType>,
+    totalUsersCount: 47,
+    pageSize: 5,
     currentPage: 1
 }
 const UsersReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
