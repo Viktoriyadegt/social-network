@@ -10,7 +10,7 @@ export type ReduxStoreType = typeof store //типизация всего сто
 const rootReducer = combineReducers({
     profilePage:ProfileReducer,
     dialogsPage:DialogsReducer,
-    sideBare:sideBareReducer,
+    sideBare: sideBareReducer,
     usersPage: UsersReducer
 })
  export type AppStateType =  ReturnType<typeof rootReducer>//типизация стейта
