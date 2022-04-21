@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
     profilePage:ProfileReducer,
     dialogsPage:DialogsReducer,
     sideBare: sideBareReducer,
-    users: UsersReducer
+    usersPage: UsersReducer
 })
  export type AppStateType =  ReturnType<typeof rootReducer>//типизация стейта
 export const store:Store<AppStateType> = createStore(rootReducer)
