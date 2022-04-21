@@ -1,5 +1,4 @@
 import {AppStateType} from "../redux/redux-store";
-import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import {
     followAC,
@@ -79,7 +78,7 @@ type MapDispatchPropsType = {
     setUsersAC: (users: Array<UsersPropsType>) => void
     setCurrentPageAC: (currentPage: number) => void
     setTotalUserCountAC: (userCount: number) => void
-    toggleIsFetchingAC: (isFetching:boolean) => void
+    toggleIsFetchingAC: (isFetching: boolean) => void
 }
 
 export type UsersType = MapDispatchPropsType & MapStatePropsType
@@ -94,7 +93,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+/*const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         followAC: (usersId: number) => {
             dispatch(followAC(usersId))
@@ -116,5 +115,14 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         }
     }
 
-}
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+}*/
+
+export default connect(mapStateToProps, {
+    followAC,
+    unFollowAC,
+    setUsersAC,
+    setCurrentPageAC,
+    setTotalUserCountAC,
+    toggleIsFetchingAC
+})
+(UsersContainer)
